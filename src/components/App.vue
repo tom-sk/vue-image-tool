@@ -9,13 +9,13 @@
 
     <div class='right'>
        
-        <vue-slider ref="slider" v-model="rValue" tooltip='false' :min='0' :max='255'></vue-slider>
+        <vue-slider ref="slider" v-model="rValue" tooltip='false' :min='0' :max='255' :processStyle='rSliderColor'></vue-slider>
         <input v-model="rValue" type='number'>
 
-        <vue-slider ref="slider" v-model="gValue" tooltip='false' :min='0' :max='255'></vue-slider>
+        <vue-slider ref="slider" v-model="gValue" tooltip='false' :min='0' :max='255' :processStyle='gSliderColor'></vue-slider>
         <input v-model="gValue" type='number'>
 
-        <vue-slider ref="slider" v-model="bValue" tooltip='false' :min='0' :max='255'></vue-slider>
+        <vue-slider ref="slider" v-model="bValue" tooltip='false' :min='0' :max='255' :processStyle='bSliderColor'></vue-slider>
         <input v-model="bValue" type='number'>
 
           <br/>
@@ -38,7 +38,7 @@
         Right
       </button>
 
-      <vue-slider ref="slider" v-model="textStyle.fontSize" tooltip='false' :min='10' :max='40'></vue-slider>
+      <vue-slider ref="slider" v-model="textStyle.fontSize" tooltip='false' :min='10' :max='40' :processStyle='processStyle2'></vue-slider>
       <input v-model="textStyle.fontSize" type='number'>
 
       <select v-model='textStyle.fontType'>
@@ -104,7 +104,10 @@ export default {
         borderBottom: '',
         borderLeft : '',
         borderRight: ''
-      }
+      },
+      rSliderColor: {"backgroundColor": `#F44336`},
+      gSliderColor: {"backgroundColor": `#00C853`},
+      bSliderColor: {"backgroundColor": `#03A9F4`},
 		}
   },
   computed: {
@@ -112,6 +115,11 @@ export default {
       return {
         'border-color': `rgb(${this.rValue}, ${this.gValue}, ${this.bValue})`,
         'color' : `rgb(${this.rValue}, ${this.gValue}, ${this.bValue})`
+      }
+    },
+    processStyle2(){
+      return {
+        "backgroundColor": `rgb(${this.rValue}, ${this.gValue}, ${this.bValue})`
       }
     },
     textObject(){
@@ -143,7 +151,7 @@ export default {
     },
     overlayChange(e){
       var borderColor = `rgb(${this.rValue}, ${this.gValue}, ${this.bValue})`;
-      var borderVal = `1px solid ${borderColor}`;
+      var borderVal = `2px solid ${borderColor}`;
       var noBorder = `0px solid ${borderColor}`;
 
       if(e.target.value == 'none') {
@@ -195,7 +203,7 @@ export default {
 }
 
 .left {
-  border: 4px solid black;
+  border: 2px solid black;
   display:flex;
   align-items: center;
   justify-content: center;
@@ -209,8 +217,8 @@ export default {
 .overlay {
   z-index: 1;
   display:flex;
-  width: 90%;
-  height:90%;
+  width: 87%;
+  height:87%;
 }
 
 </style>
